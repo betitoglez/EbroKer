@@ -166,7 +166,7 @@ public class Broker {
     	
 
     	ohlcChart.addMacd(datetime, macd.get(), macd.getIndicator());
-    	
+    	ohlcChart.addAdx(datetime, adx.getADX());
     	//chart.addIndicatorPoint(datetime, ema21.get());
     	//chart.addIndicatorBisPoint(datetime, adx.getADX());
     	
@@ -311,7 +311,7 @@ public class Broker {
         	rsi.update(history.getFloatValue(i,"LAST"));
         	prices.add(history.getFloatValue(i,"LAST"));
         	chart.addPoint(datetime, history.getFloatValue(i,"LAST"));
-        	ohlcChart.addAdx(datetime, adx.getADX());
+        	
         	
         	if ( (i-1)%5 == 0){
         		if (_open>0){

@@ -16,6 +16,8 @@ public class Handler implements PushCallback {
 	Broker broker;
 	int currentMinute = -1;
 	
+	private double _open,_high,_low,_close;
+	
 	public Handler(TradingDay tradingDay) {
 		// TODO Auto-generated constructor stub
 		this.tradingDay = tradingDay;
@@ -24,6 +26,10 @@ public class Handler implements PushCallback {
 	public Handler(Broker broker) {
 		// TODO Auto-generated constructor stub
 		this.broker = broker;
+		_open = 0;
+		_high=0;
+		_low=0;
+		_close=0;
 	}
 
 	@Override
@@ -39,11 +45,25 @@ public class Handler implements PushCallback {
 			}
 			
 			if (null != broker){
-				DateTime datetime = new DateTime(obj.getDateTimeValue("DATETIME_PRICE"));
+			
+				
+				DateTime datetime = new DateTime(obj.getDateValue("DATETIME_PRICE"));
 				int _minute = datetime.getMinuteOfDay();
+				
 				if (_minute > currentMinute){
+					if (currentMinute>0 && currentMinute%5==0){	
+						
+						broker.ohlcChart.addCandle(datetime, _open, _high, _low, _close);
+						_close = obj.getFloatValue("PRICE");
+						_high = obj.getFloatValue("PRICE");
+						_low = obj.getFloatValue("PRICE");
+					}
+					_open = obj.getFloatValue("PRICE");
 					currentMinute = _minute;
 				}else{
+					_close = obj.getFloatValue("PRICE");
+					_high = obj.getFloatValue("PRICE") > _high ? obj.getFloatValue("PRICE") : _high;
+					_low = obj.getFloatValue("PRICE") < _low || _low == 0 ? obj.getFloatValue("PRICE") : _low;
 					return;
 				}
 				broker.adx.update(obj.getFloatValue("PRICE"),obj.getFloatValue("PRICE"), obj.getFloatValue("PRICE"));
