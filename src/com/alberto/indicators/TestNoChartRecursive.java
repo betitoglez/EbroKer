@@ -345,13 +345,13 @@ public class TestNoChartRecursive {
         });
 
         int[] emaShort = { 5, 10 ,15 };
-        int[] emaMedium = {  15, 40 };
-        int[] emaLarge = { 60, 90 };
-        int[] macdShort = { 6, 12, 20 };
-        int[] macdLarge = { 20, 26 };
+        int[] emaMedium = {  5 ,15, 40 };
+        int[] emaLarge = { 50, 60, 90 };
+        int[] macdShort = { 6, 12, 20 ,30 };
+        int[] macdLarge = { 14, 20, 26 , 40 };
         int[] macdEma = { 9, 12, 18 };
-        int[] adxPeriod = {  14 };
-        int[] adxValue = { 27 };
+        int[] adxPeriod = {  8 , 14 , 20 };
+        int[] adxValue = { 20 , 27 , 40 };
         int[] adxMode = { 0 };
         int[] zoneCheck = { 2 };
 
@@ -435,8 +435,7 @@ public class TestNoChartRecursive {
                                                 current++;
                                                 label2.setText(current + " / "
                                                         + totalChecks);
-                                                System.out
-                                                        .println(totalProfitLoss);
+                                               
                                                 if (totalProfitLoss > 300) {
                                                     TestNoChartRecursive
                                                             .writetofile(
