@@ -297,7 +297,7 @@ public class Broker {
 	
 	public void historyList (){
 	    
-		MDGObject history = MDGObject.getInstance(mdgSession, "/prices/history_list?CODE_QUALITY_PRICE=RLT&ID_NOTATION="+ID_NOTATION+"&CODE_RESOLUTION=1m&VERSION=2&BLOCKSIZE=20000&OFFSET_END_RANGE=-1&OFFSET_START_RANGE=-1"); 
+		MDGObject history = MDGObject.getInstance(mdgSession, "/prices/history_list?CODE_QUALITY_PRICE=RLT&ID_NOTATION="+ID_NOTATION+"&CODE_RESOLUTION=1m&VERSION=2&BLOCKSIZE=20000&OFFSET_END_RANGE=0&OFFSET_START_RANGE=0"); 
 		int amount = history.getIntValue("AMOUNT").intValue();
 		double _open=0, _high=0 , _low=0 , _close=0;
         for (int i = 1; i < amount;i++){
